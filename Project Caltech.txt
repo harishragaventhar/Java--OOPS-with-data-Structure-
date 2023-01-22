@@ -1,0 +1,84 @@
+Code:
+package project.caltech;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+//create a file in a directory
+public class FileEx {
+    public static  void createFile() throws IOException {
+        String path="D:\\caltech project\\";
+        Scanner sc=new Scanner(System.in);
+        System.out.println("enter the file name");
+        String filename=sc.next();
+        String finalpath=path+filename;
+        System.out.println(finalpath);
+//create a file
+        File file=new File(finalpath);
+        boolean res=file.createNewFile();
+        if(res!=true) {
+            System.out.println("file is not created");
+        }
+        else {
+            System.out.println("file is created ");
+        }
+    }
+
+    public static  void  deleteFile(){
+        String path="D:\\caltech project\\";
+        Scanner sc=new Scanner(System.in);
+        System.out.println("enter the file name");
+        String filename=sc.next();
+        String finalpath=path+filename;
+        System.out.println(finalpath);
+        File file=new File(finalpath);
+//delete operation
+        file.delete();
+        System.out.println("file gets deleted");
+    }
+//display the files in an ascending order
+    public  static void viewInaAccendingOrder() {
+        String path = "D:\\caltech project\\";
+        File file = new File(path); // you are creating a new file here ... the way of geeting current file list is wrong ....
+//display operation
+        File filename[] = file.listFiles();
+//for-each
+        System.out.println("the list of files in asscending order in the " + path + "is");
+        if(filename !=null && filename.length>0){
+        for (File ff : filename) {
+            System.out.println(ff.getName());
+        }}else{
+            System.out.println(" File list may be null or there is no files in current location ");
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        int isyes;
+        do {
+        System.out.println(" LOCKME USER PLEASE Choose an option below \n\t 1. createFile  \n\t 2. Deletefile \n\t 3. View in accending order ");
+        Scanner sc=new Scanner(System.in);
+
+        int choose= sc.nextInt();
+
+        switch(choose){
+            case 1: createFile();
+                     isyes=0;break;
+            case 2:deleteFile();isyes=0; break;
+            case 3: viewInaAccendingOrder();isyes=0;break;
+            default: System.out.println(" Please choose a valid option "); isyes=1; break;
+        }
+        if(isyes!=1){
+            System.out.println("Do you want to continue \n\t1.yes \n\t2.no");
+            switch (sc.nextInt()){
+                case 1:isyes=1;break;
+                case 2:isyes=0;break;
+                default:isyes=0;
+             }
+        }
+        }while (isyes==1);
+
+    }
+}
+
+
+
